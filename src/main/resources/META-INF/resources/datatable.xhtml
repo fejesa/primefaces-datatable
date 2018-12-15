@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<h:head>
+	<link rel="stylesheet" href="styles/custom.css" type="text/css" />
+	<f:facet name="last">
+		<meta content="text/html; charset=iso-8859-1"
+			http-equiv="Content-Type" />
+	</f:facet>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:dataTable value="#{dashboard.rows}" var="row"
+			rowStyleClass="#{styleBean.getTypeStyle(row.type)}">
+			<p:column styleClass="no-right-border">
+				<h:outputText value="#{row.name}"
+					rendered="#{row.type == 'CONFIG' || row.type == 'ENTITY'}" styleClass="no-instance-name"/>
+
+				<h:outputText value="#{row.name}&lt;br/&gt;"
+					rendered="#{row.type == 'INSTANCE'}" escape="false"
+					styleClass="config-field-name" />
+				<h:outputText value="#{row.modifiedBy}&lt;br/&gt;"
+					rendered="#{row.type == 'INSTANCE'}" styleClass="field-meta"
+					escape="false" />
+				<h:outputText value="#{row.modificationTime}"
+					rendered="#{row.type == 'INSTANCE'}" styleClass="field-meta">
+					<f:convertDateTime locale="de" timeStyle="short" type="both"
+						dateStyle="full" />
+				</h:outputText>
+			</p:column>
+			<p:column>
+				<h:outputText
+					value="#{validityFormatter.format(row.dateFrom, row.dateTo)}"
+					rendered="#{row.type == 'CONFIG'}" />
+				<h:outputText value="#{row.status}" converter="statusConverter"
+					styleClass="#{styleBean.getStatusStyle(row.status)}"
+					rendered="#{row.type == 'INSTANCE'}" />
+			</p:column>
+			<p:column
+				styleClass="#{row.type == 'ENTITY' ? 'no-left-border' : 'dummy'}">
+				<p:commandButton value="Create" rendered="#{row.type == 'CONFIG'}" styleClass="ui-priority-primary"/>
+				<p:commandButton value="Edit" rendered="#{row.type == 'INSTANCE'}"/>
+				<p:commandButton value="Delete" rendered="#{row.type == 'INSTANCE'}"/>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

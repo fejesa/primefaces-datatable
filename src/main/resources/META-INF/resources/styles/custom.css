@@ -1,0 +1,56 @@
+.entity-row {
+	background: #cccccc;
+}
+
+.config-row {
+	background: #f2f2f2;
+}
+
+.instance-row {
+	background: #ffffff;
+}
+
+.config-field-name {
+	text-align: left;
+	font-weight: bold;
+	color: #2E6E9E;
+}
+
+.no-instance-name {
+	font-weight: bold;
+	font-size:20px;
+}
+
+.field-meta {
+	font-size:12px;
+	color:grey;
+	text-align: left;
+}
+
+.pending-status {
+	color: orange;
+}
+
+.failed-status {
+	color: red;
+}
+
+.edit-status {
+	color:green;
+}
+
+.submitted-status {
+	color:black;
+}
+
+.no-right-border {
+	border-right: hidden !important;
+}
+
+.no-left-border {
+	border-left: hidden !important;
+}
+
+.dummy {
+	
+}
